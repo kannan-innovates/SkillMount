@@ -9,9 +9,9 @@ import AdminPage from './pages/AdminPage'
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="flex min-h-screen">
+      <div style={{ display: 'flex', minHeight: '100vh' }}>
         <Sidebar />
-        <main className="flex-1 ml-64 p-8">
+        <main style={{ marginLeft: '256px', flex: 1, padding: '40px', minHeight: '100vh' }}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/dashboard/:id" element={<DashboardPage />} />

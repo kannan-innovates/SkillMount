@@ -58,12 +58,12 @@ export default function UploadZone({ onUploaded }: Props) {
         ref={inputRef}
         type="file"
         accept=".pdf,.docx"
-        className="hidden"
+        style={{ display: 'none' }}
         onChange={(e) => e.target.files?.[0] && handleFile(e.target.files[0])}
       />
 
       {loading ? (
-        <div className="flex flex-col items-center gap-3">
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
           <Spinner size={32} />
           <p style={{ color: 'var(--text-muted)', fontSize: '14px' }}>Processing your resume...</p>
         </div>
@@ -71,15 +71,22 @@ export default function UploadZone({ onUploaded }: Props) {
         <>
           {/* Upload icon */}
           <div
-            className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4"
-            style={{ background: 'rgba(0,174,239,0.1)' }}
+            style={{
+              width: '64px',
+              height: '64px',
+              borderRadius: '16px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto 16px',
+              background: 'rgba(0,174,239,0.1)',
+            }}
           >
             <span style={{ fontSize: '28px' }}>↑</span>
           </div>
 
           <h3
-            className="text-xl font-semibold mb-2"
-            style={{ fontFamily: 'Bricolage Grotesque', color: 'var(--text-primary)' }}
+            style={{ fontFamily: 'Bricolage Grotesque', color: 'var(--text-primary)', fontSize: '20px', fontWeight: 600, marginBottom: '8px' }}
           >
             Drop your resume here
           </h3>
@@ -93,7 +100,7 @@ export default function UploadZone({ onUploaded }: Props) {
       )}
 
       {error && (
-        <p className="mt-4 text-sm" style={{ color: 'var(--danger)' }}>{error}</p>
+        <p style={{ marginTop: '16px', fontSize: '14px', color: 'var(--danger)' }}>{error}</p>
       )}
     </div>
   )

@@ -8,21 +8,40 @@ const links = [
 export default function Sidebar() {
   return (
     <aside
-      className="fixed top-0 left-0 h-screen w-64 flex flex-col"
-      style={{ background: 'var(--bg-surface)', borderRight: '1px solid var(--border)' }}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        height: '100vh',
+        width: '256px',
+        display: 'flex',
+        flexDirection: 'column',
+        background: 'var(--bg-surface)',
+        borderRight: '1px solid var(--border)',
+        zIndex: 50,
+      }}
     >
       {/* Logo */}
-      <div className="px-6 py-6" style={{ borderBottom: '1px solid var(--border)' }}>
-        <div className="flex items-center gap-3">
+      <div style={{ padding: '24px', borderBottom: '1px solid var(--border)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div
-            className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm"
-            style={{ background: 'var(--accent)' }}
+            style={{
+              width: '32px',
+              height: '32px',
+              borderRadius: '8px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'white',
+              fontWeight: 'bold',
+              fontSize: '14px',
+              background: 'var(--accent)',
+            }}
           >
             S
           </div>
           <span
-            className="text-lg font-bold tracking-tight"
-            style={{ fontFamily: 'Bricolage Grotesque', color: 'var(--text-primary)' }}
+            style={{ fontFamily: 'Bricolage Grotesque', color: 'var(--text-primary)', fontSize: '18px', fontWeight: 'bold', letterSpacing: '-0.5px' }}
           >
             SkillMount
           </span>
@@ -30,7 +49,7 @@ export default function Sidebar() {
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 px-3 py-4 flex flex-col gap-1">
+      <nav style={{ flex: 1, padding: '16px 12px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
         {links.map(link => (
           <NavLink
             key={link.to}
@@ -58,8 +77,8 @@ export default function Sidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="px-6 py-4" style={{ borderTop: '1px solid var(--border)' }}>
-        <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+      <div style={{ padding: '16px 24px', borderTop: '1px solid var(--border)' }}>
+        <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
           SkillMount™ v1.0
         </p>
       </div>
