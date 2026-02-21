@@ -1,11 +1,9 @@
-// src/modules/resume/resume.controller.ts
-
 import { Request, Response } from 'express'
 import { processAndSaveResume } from './resume.service'
 
 export async function uploadResume(req: Request, res: Response) {
      try {
-          // Multer puts the file on req.file
+          
           if (!req.file) {
                res.status(400).json({ success: false, message: 'No file uploaded' })
                return

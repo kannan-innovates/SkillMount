@@ -1,5 +1,3 @@
-// src/modules/resume/resume.service.ts
-
 import fs from 'fs'
 import path from 'path'
 import { PDFParse } from 'pdf-parse'
@@ -44,8 +42,13 @@ export async function extractText(filePath: string, mimetype: string): Promise<{
 // ─── Basic Parsing ──────
 
 function parseSkills(text: string): string[] {
-     const lower = text.toLowerCase()
-     return KNOWN_SKILLS.filter(skill => lower.includes(skill))
+  const lower = text.toLowerCase()
+  return KNOWN_SKILLS.filter(skill => {
+    // Escape special regex characters like + . * ? ( ) [ ] { } ^ $ |
+    const escaped = skill.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    const regex = new RegExp(`\\b${escaped}\\b`, 'i')
+    return regex.test(lower)
+  })
 }
 
 function parseEducation(text: string): string[] {
@@ -68,10 +71,9 @@ function parseExperience(text: string): string[] {
 }
 
 function parseLocation(text: string): string {
-     // Look for common patterns like "Chennai, India" or "New York, USA"
-     const locationPattern = /([A-Z][a-z]+(?:\s[A-Z][a-z]+)*),\s*([A-Z][a-zA-Z\s]+)/
-     const match = text.match(locationPattern)
-     return match ? match[0] : ''
+  const locationPattern = /([A-Z][a-z]+(?:\s[A-Z][a-z]+)*),\s*(Kerala|Tamil Nadu|Karnataka|Maharashtra|India|USA|UK|Canada|Australia|Germany)/
+  const match = text.match(locationPattern)
+  return match ? match[0] : ''
 }
 
 // ─── Main Service Function ───────────────────────────────────────
