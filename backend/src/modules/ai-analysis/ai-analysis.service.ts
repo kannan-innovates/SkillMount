@@ -4,12 +4,25 @@ import { Resume } from '../resume/resume.model'
 import { AIAnalysisResult } from './ai-analysis.types'
 import { buildResumeAnalysisPrompt } from './ai-analysis.prompt'
 
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY })
+let groq: Groq | null = null
+
+function getGroqClient() {
+  if (!process.env.GROQ_API_KEY) {
+    throw new Error('GROQ_API_KEY is not configured')
+  }
+
+  if (!groq) {
+    groq = new Groq({ apiKey: process.env.GROQ_API_KEY })
+  }
+
+  return groq
+}
 
 async function analyzeWithGroq(rawText: string): Promise<AIAnalysisResult> {
   const prompt = buildResumeAnalysisPrompt(rawText)
+  const client = getGroqClient()
 
-  const response = await groq.chat.completions.create({
+  const response = await client.chat.completions.create({
     model: 'llama-3.3-70b-versatile',   // fast + free on Groq
     messages: [{ role: 'user', content: prompt }],
     temperature: 0.3,           // lower = more consistent/structured output
