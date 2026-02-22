@@ -327,7 +327,21 @@ JWT_EXPIRES_IN=7d
 ADMIN_EMAIL=admin@skillmount.com
 ADMIN_PASSWORD=Admin@123
 GROQ_API_KEY=gsk_...
+
+# Frontend (.env)
+VITE_API_URL=https://skillmount-backend.onrender.com/api
 ```
+
+---
+
+## Live Demo
+
+| Service | URL |
+|---------|-----|
+| Frontend | https://skill-mount.vercel.app |
+| Backend API | https://skillmount-backend.onrender.com/api |
+
+> Note: Backend is hosted on Render free tier — first request may take 30–50 seconds to wake up.
 
 ---
 
@@ -381,7 +395,7 @@ Each service has its own DB connection, its own `.env`, and communicates via RES
 | Chrome Extension | Stub | `/api/cv/auto-apply` is the integration point |
 | Token usage logging | Easy | Log `response.usage` from Groq response |
 | Unit tests | Structure ready | Jest + supertest per module |
-| Deployment | Ready | Backend → Railway/Render, Frontend → Vercel |
+| Deployment | Done | Backend → Render, Frontend → Vercel |
 
 ### Real Job Platform Integration
 
